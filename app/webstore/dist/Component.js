@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/UIComponent","webstore/webstore/model/models","sap/ui/model/json/JSONModel"],(e,t,o)=>{"use strict";return e.extend("webstore.webstore.Component",{metadata:{manifest:"json",interfaces:["sap.ui.core.IAsyncContentCreation"]},init(){e.prototype.init.apply(this,arguments);this.getRouter().initialize();this.setModel(new o({newStoreName:"",newAttrKey:"",newAttrValue:""}),"ui")}})});
+//# sourceMappingURL=Component.js.map

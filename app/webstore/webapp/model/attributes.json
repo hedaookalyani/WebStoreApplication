@@ -1,0 +1,8 @@
+{
+  "attributes": [
+    { "key": "DEFAULT_COUNTRY", "label": "Default Country" },
+    { "key": "DEFAULT_PLANT", "label": "Default Plant" },
+    { "key": "DOCUMENT_TYPE", "label": "Document Type" },
+    { "key": "ACCOUNT_GROUP_MAP", "label": "Account Group Map" }
+  ]
+}

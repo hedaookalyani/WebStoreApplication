@@ -1,0 +1,57 @@
+<mvc:View controllerName="webstore.webstore.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="WebStore Configuration">
+ 
+      <content>
+        <Table
+          id="storesTable"
+          items="{
+                path: '/Stores'
+                }"
+          mode="MultiSelect"
+          includeItemInSelection="true"
+          growing="true"
+          growingScrollToLoad="true">
+
+          <headerToolbar>
+            <Toolbar id="_IDGenToolbar">
+              <Title id="storesTitle" text="Stores" level="H2" />
+              <ToolbarSpacer id="_IDGenToolbarSpacer3"/>
+                <SearchField id="_IDGenSearchField"
+                  width="20rem"
+                  placeholder="Search by store name"
+                  liveChange=".onSearch"
+                  search=".onSearch"/>
+              <ToolbarSpacer id="_IDGenToolbarSpacer"/>
+              <Button id="_IDGenButton" text="Create Store"  press=".onCreateStore"/>
+              <Button id="_IDGenButton1" text="Delete" type="Reject" press=".onDeleteStore"/>
+              <Button id="_IDGenButton2" text="Save Changes" type="Accept" press=".onSave"/>
+            </Toolbar>
+          </headerToolbar>
+
+          <columns>
+            <Column id="_IDGenColumn" width="20rem"><Text id="_IDGenText" text="Store Name"/></Column>
+            <Column id="_IDGenColumn2"  width="20rem"><Text id="_IDGenText13"  text="Company Code"/></Column>
+            <Column id="_IDGenColumn3"   width="20rem"><Text id="_IDGenText18"   text="Sales Org"/></Column>
+            <Column id="_IDGenColumn1" width="10rem"><Text id="_IDGenText1" text="Active"/></Column>
+            <Column id="_IDGenColumn5" width="3rem" hAlign="End"> <Text id="_IDGenText19" text=""/></Column>
+          </columns>
+
+          <items>
+            <ColumnListItem id="_IDGenColumnListItem">
+              <cells>
+                <!-- Update: editable field -->
+                <Text id="_IDGenText2" text="{name}" width="100%"/>
+                <Text id="_IDGenText11" text="{companyCode}" width="100%" />
+                <Text id="_IDGenText12"  text="{salesOrg}" width="100%" />
+                <Switch id="_IDGenSwitch" state="{active}" enabled="true" />
+               <Button id="_IDGenButton8" icon="sap-icon://navigation-right-arrow" type="Transparent" press="onStorePress" />
+              </cells>
+            </ColumnListItem>
+          </items>
+
+        </Table>
+      </content>
+    </Page>
+</mvc:View>

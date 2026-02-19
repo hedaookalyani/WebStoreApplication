@@ -1,0 +1,20 @@
+<mvc:View xmlns:m="sap.m"
+  controllerName="webstore.webstore.controller.App"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.f">
+
+  <f:ShellBar
+      id="shellBar"
+      title="WebStore Configuration"
+      homeIcon="images/sana.png"
+      showNotifications="false"
+      showProductSwitcher="false">
+    <f:profile>
+        <Avatar id="userAvatar"/>
+    </f:profile>
+  </f:ShellBar>
+
+  <m:App id="app">
+</m:App>
+</mvc:View>

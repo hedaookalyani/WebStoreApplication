@@ -1,0 +1,31 @@
+{
+  "xsappname": "WebStoreApp",
+  "tenant-mode": "dedicated",
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://9bd8f307trial-dev-webstoreapp-approuter.cfapps.us10-001.hana.ondemand.com/**"
+    ],
+    "grant-types": [
+      "authorization_code",
+      "refresh_token",
+      "client_credentials",
+      "user_token"
+    ]
+  },
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Read",
+      "description": "Read access"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Reader",
+      "description": "Read access",
+      "scope-references": [
+        "$XSAPPNAME.Read"
+      ]
+    }
+  ]
+}

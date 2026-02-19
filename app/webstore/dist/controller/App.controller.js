@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("webstore.webstore.controller.App",{onInit(){console.log("Controller App Triggered");var e=this.byId("userAvatar");if(sap.ushell&&sap.ushell.Container){var r=sap.ushell.Container.getUser();var s=r.getFullName();var t=s.split(" ");var l=t[0][0]+t[1][0];e.setInitials(l)}}})});
+//# sourceMappingURL=App.controller.js.map

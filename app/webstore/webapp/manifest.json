@@ -1,0 +1,132 @@
+{
+  "_version": "1.81.0",
+  "sap.app": {
+    "id": "webstore.webstore",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.20.1",
+      "toolsId": "d43cbfb1-0b09-4645-a5f3-aefd2691312a"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "../odata/v4/config/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+  }
+},
+"sap.ui": {
+  "technology": "UI5",
+  "icons": {
+    "icon": "",
+    "favIcon": "",
+    "phone": "",
+    "phone@2": "",
+    "tablet": "",
+    "tablet@2": ""
+  },
+  "deviceTypes": {
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  }
+},
+"sap.ui5": {
+  "flexEnabled": true,
+  "config": {"theme": "sap_horizon" },
+  "dependencies": {
+    "minUI5Version": "1.144.0",
+    "libs": {
+      "sap.m": {},
+      "sap.ui.core": {},
+      "sap.ui.layout": {}
+    }
+  },
+  "contentDensities": {
+    "compact": true,
+    "cozy": true
+  },
+  "models": {
+    "i18n": {
+      "type": "sap.ui.model.resource.ResourceModel",
+      "settings": {
+        "bundleName": "webstore.webstore.i18n.i18n"
+      }
+    },
+    "": {
+      "type": "sap.ui.model.odata.v4.ODataModel",
+      "dataSource": "mainService",
+      "settings": {
+        "synchronizationMode": "None",
+        "operationMode": "Server",
+        "autoExpandSelect": true,
+        "earlyRequests": true,
+        "groupId": "$auto",
+        "updateGroupId": "changes"
+      }
+    }
+  },
+  "resources": {
+    "css": [
+      {
+        "uri": "css/style.css"
+      }
+    ]
+  },
+  "routing": {
+    "config": {
+      "routerClass": "sap.f.routing.Router",
+      "viewType": "XML",
+      "viewPath": "webstore.webstore.view",
+      "controlId": "app",
+      "controlAggregation": "pages",
+      "transition": "slide",
+      "async": true
+    },
+    "routes": [
+      {
+        "name": "list",
+        "pattern": "",
+        "target": "list"
+      },
+      {
+        "name": "store",
+        "pattern": "store/{ID}",
+        "target": [
+          "list",
+          "store"
+        ]
+      }
+    ],
+    "targets": {
+      "list": {
+        "viewName": "View1",
+        "viewId": "View1",
+        "viewLevel": 1
+      },
+      "store": {
+        "viewName": "Store",
+        "viewId": "store",
+        "viewLevel": 2
+      }
+    }
+  },
+  "rootView": {
+    "viewName": "webstore.webstore.view.App",
+    "type": "XML",
+    "id": "App",
+    "async": true
+  }
+}
+}

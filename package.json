@@ -1,0 +1,48 @@
+{
+  "name": "WebStoreApp",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "dependencies": {
+    "@cap-js/hana": "^2.6.0",
+    "@sap-cloud-sdk/connectivity": "^4",
+    "@sap-cloud-sdk/http-client": "^4",
+    "@sap-cloud-sdk/resilience": "^4.4.0",
+    "@sap/cds": "^9.7.1",
+    "@sap/xsenv": "^6.1.0",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^2",
+    "@sap/cds-dk": "^9.7.1",
+    "cds-plugin-ui5": "^0.13.0",
+    "mbt": "^1.2.29",
+    "rimraf": "^5.0.5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "node start.js",
+    "watch-webstore": "cds watch --open webstore.webstore/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "undeploy": "cf undeploy WebStoreApp --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "private": true,
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana"
+      },
+      "API_COUNTRY_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_COUNTRY_SRV",
+        "credentials": {
+          "destination": "S4_Sana",
+          "path": "/sap/opu/odata/sap/API_COUNTRY_SRV"
+        }
+      }
+    }
+  },
+  "workspaces": [
+    "app/*"
+  ]
+}

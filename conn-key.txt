@@ -1,0 +1,29 @@
+Getting key WebStoreApp-connectivity-key for service instance WebStoreApp-connectivity as k.hedaoo@sana-commerce.com...
+
+{
+  "credentials": {
+    "clientid": "sb-clone8626576384d44b45b88c742e0c0960ef!b586523|connectivity!b23892",
+    "clientsecret": "22aea5b7-a7dd-48c9-984c-4e88da8663e9$WnwLNTO94h61OAEDlQYNNOsBNKRIpnd0ARcF28tOtjI=",
+    "credential-type": "binding-secret",
+    "identityzone": "9bd8f307trial",
+    "onpremise_proxy_host": "connectivityproxy.internal.cf.us10-001.hana.ondemand.com",
+    "onpremise_proxy_http_port": "20003",
+    "onpremise_proxy_ldap_port": "20001",
+    "onpremise_proxy_port": "20003",
+    "onpremise_proxy_rfc_port": "20001",
+    "onpremise_socks5_proxy_port": "20004",
+    "region_configuration_id": "cf-us10-001",
+    "tenantid": "787946ae-ef78-4514-bda6-39b117f67409",
+    "tenantmode": "dedicated",
+    "token-type": [
+      "xsuaa"
+    ],
+    "token_service_domain": "authentication.us10.hana.ondemand.com",
+    "token_service_url": "https://9bd8f307trial.authentication.us10.hana.ondemand.com",
+    "uaadomain": "authentication.us10.hana.ondemand.com",
+    "url": "https://9bd8f307trial.authentication.us10.hana.ondemand.com",
+    "verificationkey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsCPwRXVtZk0L6jMENbc3\nNoqZWCSQGq0rABS7x6JGFvZvGld8NCjkK/fX9a8Xi/yKYK8rlGpJsg8qwSui3YQW\n0vQDyfELquugjf/SjElSy6123CCEvuJG2/ApGqzNecLrwHriIYSy7CNGhrMV+VPy\newxWYEew72hPuq5AN9qOGFwHIKtmHYlf+XSh8I6PY8/RjoJwO0LfsmR/5T0pqbOB\nT+3NturNmLql6WWhh2Iklr03zzWox9ALUxwQVa3jgBzvaOU8nmhwablIg0336qj8\nv/T5PwUgjdeIjknCLkb+ebZmxkIs9+kgt7jeb+kzfTm/txLEqxcNX+ubAg9hEUfG\nIwIDAQAB\n-----END PUBLIC KEY-----",
+    "xsappname": "clone8626576384d44b45b88c742e0c0960ef!b586523|connectivity!b23892"
+  }
+}
+
