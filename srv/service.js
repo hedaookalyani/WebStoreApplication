@@ -34,10 +34,71 @@ module.exports = (srv) => {
     return result;
   });
 
-  const { Stores, StoreSettings } = srv.entities;
+  const { Stores, StoreSettings ,StoreCapabilities } = srv.entities;
+ // ✅ NEW: defaults row on Store creation
+  const DEFAULT_CAPS = {
+    CultureId: 1043,
+    CompatibilityLevel: "SCC 1.0.0",
+    SupportsPersistedBaskets: true,
+    SupportsShippingMethods: false,
+    SupportsShippingOrigin: true,
+    SupportsPromotableQuotes: true,
+    OrderCommentLineMaxLength: 250,
+    SupportsInvoicePayment: true,
+    SupportsDocFreeRma: true,
+    SupportsDocBasedRma: false,
+    SupportsRmaSplitLines: true,
+    SupportsRetailOffers: true,
+    SupportsShippingAddressesManagement: true,
+    SupportsSalesDocumentAttachmentsUpload: true,
+    SupportsShippingAddressExtraFields: true,
+    SanaConnectorVersion: "1.0.0.0",
+    SupportsDocumentEntityFields: true,
+    SupportsStoreLocations: false,
+    SupportsSubscriptionOrderIdentification: true,
+    SupportsCustomerSpecificProductIds: true,
+    SupportsPaymentCostPercentage: true,
+    SupportsMultiLocationStock: true,
+    SupportsBackorderLines: true,
+    SupportsCalculatedInfoPerVariant: true,
+    SupportsCheckoutItemLineComments: true,
+    SupportsCheckoutStock: true,
+    SupportsEstimatedAvailabilityDates: true,
+    SupportsProductDiscounts: true,
+    SupportsFeatures: true,
+    SupportsStockInfoInventoryPrecision: true,
+    SupportsSalesLineEntityFields: true,
+    SupportsMultipleSalesAgreements: true,
+  };
+
+  srv.after("CREATE", Stores, async (created, req) => {
+    const tx = cds.tx(req);
+    const stores = Array.isArray(created) ? created : [created];
+
+    for (const s of stores) {
+      // If caller sent inline capabilities, don't overwrite
+      const hasInline = s.capabilities && Object.keys(s.capabilities).length > 0;
+      if (hasInline) continue;
+
+      // Prevent duplicates (in case of retries)
+      const exists = await tx.run(
+        SELECT.one.from(StoreCapabilities).columns("ID").where({ store_ID: s.ID })
+      );
+      if (exists) continue;
+
+      await tx.run(
+        INSERT.into(StoreCapabilities).entries({
+          ...DEFAULT_CAPS,
+          store_ID: s.ID,
+          storeName: s.name,
+        })
+      );
+    }
+  });
+
   srv.before(["CREATE", "UPDATE"], StoreSettings, async (req) => {
     const tx = cds.tx(req);
-
+    
     // 1) Resolve store id from payload (CREATE usually has it; UPDATE often not)
     let storeId =
       req.data.store_ID ||

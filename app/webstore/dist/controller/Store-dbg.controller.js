@@ -37,7 +37,9 @@ sap.ui.define([
           CHECK_RULE: "",
           DEFAULT_PLANT_PRD: "",
           DELIVERY_PLANT: "",
-          PRODUCT_STORAGE_LOCATION: ""
+          PRODUCT_STORAGE_LOCATION: "",
+           // keep structure only, values will come from DB
+          capabilities: {}
         }
       }), "vm");
     },
@@ -111,7 +113,8 @@ sap.ui.define([
         editPrc: false,
         editOrd: false,
         editOrdLines: false,
-        editModePrd: false
+        editModePrd: false,
+        editCaps: false
       }), "ui");
 
       const sId = oEvent.getParameter("arguments").ID;
@@ -123,6 +126,7 @@ sap.ui.define([
 
       // ✅ now load store-specific settings
       await this._loadSettingsIntoVM();
+      await this._loadCapabilitiesIntoVM();   // ✅ load from DB
     },
 
     onNavBack() {
@@ -556,6 +560,100 @@ sap.ui.define([
       // this.getView().getModel("vm").setProperty("/general/DEFAULT_COUNTRY", sCountryName);
       const sCountryName = oItem.getText();
       this.getView().getModel("vm").setProperty("/general/DEFAULT_COUNTRY", sCountryName)
-    }
+    },
+    async _loadCapabilitiesIntoVM() {
+  const oView = this.getView();
+  const oModel = oView.getModel();
+  const oVM = oView.getModel("vm");
+
+  const oStoreCtx = oView.getBindingContext();
+  if (!oStoreCtx) return;
+
+  const sStoreId = oStoreCtx.getProperty("ID");
+
+  // Read the row created by your CAP "after CREATE Stores" defaults logic
+  const oList = oModel.bindList("/StoreCapabilities", null, null, null, {
+    $$updateGroupId: "changes",
+    $filter: `store_ID eq '${sStoreId}'`
   });
+
+  const aCtx = await oList.requestContexts(0, 1);
+  if (!aCtx.length) {
+    // means row isn't there (shouldn't happen if backend defaults work)
+    oVM.setProperty("/capabilities", {});
+    return;
+  }
+
+  this._capsCtx = aCtx[0]; // keep context for save later
+  oVM.setProperty("/capabilities", { ...this._capsCtx.getObject() });
+},
+
+onEditCaps() {
+  this.getView().getModel("ui").setProperty("/editCaps", true);
+},
+async onSaveCaps() {
+  const oView = this.getView();
+  const oModel = oView.getModel();
+  const oVM = oView.getModel("vm");
+
+  try {
+    if (!this._capsCtx) {
+      MessageBox.error("Capabilities not loaded");
+      return;
+    }
+
+    const data = oVM.getProperty("/capabilities") || {};
+        // ✅ Convert numeric fields BEFORE patching
+    data.CultureId = Number(data.CultureId || 0);
+    data.OrderCommentLineMaxLength = Number(data.OrderCommentLineMaxLength || 0); 
+    // Don't patch technical fields / keys
+    const ignore = new Set([
+      "ID",
+      "store_ID",
+      "store",
+      "storeName",
+      "createdAt",
+      "createdBy",
+      "modifiedAt",
+      "modifiedBy"
+    ]);
+
+    // PATCH only fields that exist in the payload
+    for (const k of Object.keys(data)) {
+      if (ignore.has(k)) continue;
+      this._capsCtx.setProperty(k, data[k]);
+    }
+
+    // Persist to DB (because updateGroupId = "changes")
+    await oModel.submitBatch("changes");
+
+    MessageToast.show("Capabilities saved");
+    oView.getModel("ui").setProperty("/editCaps", false);
+
+    // Reload from DB to reflect server truth
+    await this._loadCapabilitiesIntoVM();
+  } catch (e) {
+    MessageBox.error(e?.message || "Save failed");
+  }
+},
+async onCancelCaps() {
+  const oView = this.getView();
+  const oModel = oView.getModel();
+
+  try {
+    // revert pending updates in group
+    oModel.resetChanges("changes");
+  } catch (e) {
+    // ignore if nothing to reset
+  }
+
+  // reload from DB and exit edit mode
+  await this._loadCapabilitiesIntoVM();
+  oView.getModel("ui").setProperty("/editCaps", false);
+
+  MessageToast.show("Changes discarded");
+}
+  });
+
+
 });

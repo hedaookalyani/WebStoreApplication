@@ -13,11 +13,11 @@
       <VBox id="_IDGenVBox2" class="sapUiMediumMargin">
 
         <HBox id="_IDGenHBox" alignItems="Center" class="sapUiTinyMarginBottom">
-        <Title id="_IDGenTitle1" text="{name}+( Store Active : {active} )" level="H3"/>
-   <ObjectStatus id="_IDGenObjectStatus"
-  text="{= ${active} === 'Yes' ? 'Active' : 'Inactive' }"
-  state="{= ${active} === 'Yes' ? 'Success' : 'Error' }"
-  icon="{= ${active} === 'Yes' ? 'sap-icon://accept' : 'sap-icon://decline' }" />
+        <Title id="_IDGenTitle1" text="{name} " level="H3"/>
+        <ObjectStatus id="_IDGenObjectStatus"
+        text="{= ${active} === 'Yes' ? 'Active' : 'Inactive' }"
+        state="{= ${active} === 'Yes' ? 'Success' : 'Error' }"
+        icon="{= ${active} === 'Yes' ? 'sap-icon://accept' : 'sap-icon://decline' }" />
 
        </HBox>
 
@@ -276,6 +276,115 @@
                 <Input id="_IDGenInput15"   value="{vm>/general/PRODUCT_STORAGE_LOCATION}" width="200px" editable="{ui>/editModePrd}"/>
                </f:SimpleForm>
               
+            </VBox>
+          </IconTabFilter>
+          <IconTabFilter id="_IDGenIconTabFilter6" text="Store Capabilities" key="caps">
+            <VBox id="_IDGenVBox" class="sapUiSmallMargin">
+              <HBox id="_IDGenHBox5" justifyContent="End">
+                <Button id="_IDGenButton24" text="Edit" press=".onEditCaps" visible="{= !${ui>/editCaps} }"/>
+                <Button id="_IDGenButton25" text="Save changes" press=".onSaveCaps" visible="{ui>/editCaps}"/>
+                <Button id="_IDGenButton26" text="Cancel changes" press=".onCancelCaps" visible="{ui>/editCaps}"/>
+              </HBox>
+
+          <f:SimpleForm id="_IDGenSimpleForm3" editable="{ui>/editCaps}" layout="ResponsiveGridLayout">
+          
+            <Label id="_IDGenLabel24" text="Culture Id"/>
+            <Input id="_IDGenInput16" value="{vm>/capabilities/CultureId}" type="Number" width="200px" maxLength = "25" editable="{ui>/editCaps}" />
+
+            <Label id="_IDGenLabel25" text="Compatibility Level"/>
+            <Input id="_IDGenInput17" value="{vm>/capabilities/CompatibilityLevel}" width="200px" maxLength = "25" editable="{ui>/editCaps}" />
+
+            <Label id="_IDGenLabel26" text="Sana Connector Version"/>
+            <Input id="_IDGenInput18" value="{vm>/capabilities/SanaConnectorVersion}" width="200px" maxLength = "25" editable="{ui>/editCaps}" />
+
+            <Label id="_IDGenLabel27" text="Order Comment Line Max Length"/>
+            <Input id="_IDGenInput19" value="{vm>/capabilities/OrderCommentLineMaxLength}" type="Number" width="200px" maxLength = "25" editable="{ui>/editCaps}" />
+      
+            <Label id="_IDGenLabel28" text="Supports Promotable Quotes"/>
+            <Switch id="_IDGenSwitch3" state="{vm>/capabilities/SupportsPromotableQuotes}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel29" text="Supports Invoice Payment"/>
+            <Switch id="_IDGenSwitch4" state="{vm>/capabilities/SupportsInvoicePayment}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel30" text="Supports Document Entity Fields"/>
+            <Switch id="_IDGenSwitch5" state="{vm>/capabilities/SupportsDocumentEntityFields}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel31" text="Supports Sales Line Entity Fields"/>
+            <Switch id="_IDGenSwitch6" state="{vm>/capabilities/SupportsSalesLineEntityFields}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel32" text="Supports Sales Document Attachments Upload"/>
+            <Switch id="_IDGenSwitch7" state="{vm>/capabilities/SupportsSalesDocumentAttachmentsUpload}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel33" text="Supports Multiple Sales Agreements"/>
+            <Switch id="_IDGenSwitch8" state="{vm>/capabilities/SupportsMultipleSalesAgreements}" enabled="{ui>/editCaps}"/>
+   
+            <Label id="_IDGenLabel34" text="Supports Shipping Methods"/>
+            <Switch id="_IDGenSwitch9" state="{vm>/capabilities/SupportsShippingMethods}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel35" text="Supports Shipping Origin"/>
+            <Switch id="_IDGenSwitch10" state="{vm>/capabilities/SupportsShippingOrigin}" enabled="{ui>/editCaps}" />
+
+            <Label id="_IDGenLabel36" text="Supports Shipping Addresses Management"/>
+            <Switch id="_IDGenSwitch11" state="{vm>/capabilities/SupportsShippingAddressesManagement}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel37" text="Supports Shipping Address Extra Fields"/>
+            <Switch id="_IDGenSwitch12" state="{vm>/capabilities/SupportsShippingAddressExtraFields}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel38" text="Supports Store Locations"/>
+            <Switch id="_IDGenSwitch13" state="{vm>/capabilities/SupportsStoreLocations}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel39" text="Supports Persisted Baskets"/>
+            <Switch id="_IDGenSwitch14" state="{vm>/capabilities/SupportsPersistedBaskets}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel40" text="Supports Checkout Item Line Comments"/>
+            <Switch id="_IDGenSwitch15" state="{vm>/capabilities/SupportsCheckoutItemLineComments}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel41" text="Supports Checkout Stock"/>
+            <Switch id="_IDGenSwitch16" state="{vm>/capabilities/SupportsCheckoutStock}" enabled="{ui>/editCaps}"/>
+           
+            <Label id="_IDGenLabel42" text="Supports Multi Location Stock"/>
+            <Switch id="_IDGenSwitch17" state="{vm>/capabilities/SupportsMultiLocationStock}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel43" text="Supports Backorder Lines"/>
+            <Switch id="_IDGenSwitch18" state="{vm>/capabilities/SupportsBackorderLines}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel44" text="Supports Stock Info Inventory Precision"/>
+            <Switch id="_IDGenSwitch19" state="{vm>/capabilities/SupportsStockInfoInventoryPrecision}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel45" text="Supports Estimated Availability Dates"/>
+            <Switch id="_IDGenSwitch20" state="{vm>/capabilities/SupportsEstimatedAvailabilityDates}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel46" text="Supports Calculated Info Per Variant"/>
+            <Switch id="_IDGenSwitch21" state="{vm>/capabilities/SupportsCalculatedInfoPerVariant}" enabled="{ui>/editCaps}"/>
+            
+            <Label id="_IDGenLabel47" text="Supports Product Discounts"/>
+            <Switch id="_IDGenSwitch22" state="{vm>/capabilities/SupportsProductDiscounts}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel48" text="Supports Payment Cost Percentage"/>
+            <Switch id="_IDGenSwitch23" state="{vm>/capabilities/SupportsPaymentCostPercentage}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel49" text="Supports Features"/>
+            <Switch id="_IDGenSwitch24" state="{vm>/capabilities/SupportsFeatures}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel50" text="Supports Retail Offers"/>
+            <Switch id="_IDGenSwitch25" state="{vm>/capabilities/SupportsRetailOffers}" enabled="{ui>/editCaps}"/>
+     
+            <Label id="_IDGenLabel51" text="Supports Doc Free RMA"/>
+            <Switch id="_IDGenSwitch26" state="{vm>/capabilities/SupportsDocFreeRma}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel52" text="Supports Doc Based RMA"/>
+            <Switch id="_IDGenSwitch27" state="{vm>/capabilities/SupportsDocBasedRma}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel53" text="Supports RMA Split Lines"/>
+            <Switch id="_IDGenSwitch28" state="{vm>/capabilities/SupportsRmaSplitLines}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel54" text="Supports Customer Specific Product Ids"/>
+            <Switch id="_IDGenSwitch29" state="{vm>/capabilities/SupportsCustomerSpecificProductIds}" enabled="{ui>/editCaps}"/>
+
+            <Label id="_IDGenLabel55" text="Supports Subscription Order Identification"/>
+            <Switch id="_IDGenSwitch30" state="{vm>/capabilities/SupportsSubscriptionOrderIdentification}" enabled="{ui>/editCaps}"/>
+
+              </f:SimpleForm>
             </VBox>
           </IconTabFilter>
 

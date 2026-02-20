@@ -27,3 +27,41 @@ entity StoreSettings : cuid, managed
   isDefault   : Boolean default false;
 
 }
+
+entity StoreCapabilities : cuid, managed {
+  store : Association to Stores;
+  storeName : String(80); 
+  CultureId                              : Integer;
+  CompatibilityLevel                     : String(20);
+
+  SupportsPersistedBaskets               : Boolean;
+  SupportsShippingMethods                : Boolean;
+  SupportsShippingOrigin                 : Boolean;
+  SupportsPromotableQuotes               : Boolean;
+  OrderCommentLineMaxLength              : Integer;
+  SupportsInvoicePayment                 : Boolean;
+  SupportsDocFreeRma                     : Boolean;
+  SupportsDocBasedRma                    : Boolean;
+  SupportsRmaSplitLines                  : Boolean;
+  SupportsRetailOffers                   : Boolean;
+  SupportsShippingAddressesManagement    : Boolean;
+  SupportsSalesDocumentAttachmentsUpload : Boolean;
+  SupportsShippingAddressExtraFields     : Boolean;
+  SanaConnectorVersion                   : String(20);
+  SupportsDocumentEntityFields           : Boolean;
+  SupportsStoreLocations                 : Boolean;
+  SupportsSubscriptionOrderIdentification: Boolean;
+  SupportsCustomerSpecificProductIds     : Boolean;
+  SupportsPaymentCostPercentage          : Boolean;
+  SupportsMultiLocationStock             : Boolean;
+  SupportsBackorderLines                 : Boolean;
+  SupportsCalculatedInfoPerVariant       : Boolean;
+  SupportsCheckoutItemLineComments       : Boolean;
+  SupportsCheckoutStock                  : Boolean;
+  SupportsEstimatedAvailabilityDates     : Boolean;
+  SupportsProductDiscounts               : Boolean;
+  SupportsFeatures                       : Boolean;
+  SupportsStockInfoInventoryPrecision    : Boolean;
+  SupportsSalesLineEntityFields          : Boolean;
+  SupportsMultipleSalesAgreements        : Boolean;
+}

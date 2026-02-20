@@ -81,8 +81,8 @@ sap.ui.define([
             try {
                 const oTable = this.byId("storesTable");
                 const oListBinding = oTable.getBinding("items");
-
-                oListBinding.create({
+               // 1) create transient context (queued in updateGroupId "changes")
+                const oCtx = oListBinding.create({
                     name: sName,
                     companyCode: sCompanyCode,
                     salesOrg: sSalesOrg,
@@ -90,8 +90,11 @@ sap.ui.define([
                     division: sDivsion,
                     active: true
                 });
-
+              // 2) send batch (this is REQUIRED with updateGroupId:"changes")
                 await oModel.submitBatch("changes");
+
+             // 3) now wait until the created context is persisted
+                await oCtx.created();
 
                 oListBinding.refresh();
 

@@ -5,7 +5,7 @@ using { API_COUNTRY_SRV as external } from './external/API_COUNTRY_SRV';
 service ConfigService {
   entity Stores        as projection on db.Stores;
   entity StoreSettings as projection on db.StoreSettings;
-
+  entity StoreCapabilities as projection on db.StoreCapabilities;
   entity CountryVH as select from external.A_Country as c
     left join external.A_CountryText as t
       on  t.Country = c.Country
